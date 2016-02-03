@@ -11,8 +11,8 @@
 #include <vector>
 #include <boost/math/distributions/normal.hpp>
 
-#include "option.h"
-#include "european.h"
+#include "option.hpp"
+#include "european.hpp"
 
 using namespace std;
 using boost::math::normal;
@@ -38,7 +38,7 @@ T european<T>::price_binomial()
     T d = 1.0/u;
     T p_up = (R-d)/(u-d);
     T p_down = 1.0 - p_up;
-    vector<T> prices(p_steps + 1); 
+    vector<T> prices(p_steps + 1);
     prices[0] = p_curr_price*pow(d, p_steps);
     for (int i =0; i<= p_steps; ++i) {
         prices[i] = uu*prices[i-1];
@@ -52,7 +52,7 @@ T european<T>::price_binomial()
             call_values[i] = (p_up*call_values[i+1]+p_down*call_values[i]*rinv);
         }
     }
-    
+
     return call_values[0];
 }
 
@@ -69,6 +69,5 @@ T european<T>::price_blackscholes()
 template<class T>
 T european<T>::price_fdm()
 {
-    
-}
 
+}
