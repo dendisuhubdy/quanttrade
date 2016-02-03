@@ -11,9 +11,9 @@
 template<class T>
 class option{
 public:
-    option();
+    option(T volatility, T curr_price, T strike_price, T maturity, T int_rates);
     ~option();
-    T price(T vol, T cur_price, T strike_price, T maturity, T int_rates);
+    T price();
 protected:
     T volatility;
     T current_price;

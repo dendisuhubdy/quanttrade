@@ -5,6 +5,10 @@
 	> Created Time: Thu Jan 21 23:15:53 2016
  ************************************************************************/
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 
+int main()
+{
+    return 0;
+}
