@@ -12,13 +12,13 @@
 
 int main(int argc, char **argv) {
   // Create the option parameters
-  double K = 120.00;  // Strike price
+  double K = 0.50;  // Strike price
   double r = 0.05;   // Risk-free rate (5%)
   double v = 0.2;    // Volatility of the underlying (20%)
-  double T = 2.00;    // One year until expiry
+  double T = 1.00;    // One year until expiry
 
   // FDM discretisation parameters
-  double x_dom = 100.0;       // Spot goes from [0.0, 1.0]
+  double x_dom = 1.0;       // Spot goes from [0.0, 1.0]
   unsigned long J = 20; 
   double t_dom = T;         // Time period as for the option
   unsigned long N = 20;     

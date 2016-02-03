@@ -5,22 +5,20 @@
 	> Created Time: Tue 02 Feb 2016 10:46:42 PM EST
  ************************************************************************/
 
-#include <iostream>
-#include <cmath>
-#include <algorithm>
-#include <vector>
-#include <boost/math/distributions/normal.hpp>
+ #include <iostream>
+ #include <cmath>
+ #include <algorithm>
+ #include <vector>
+ #include <boost/math/distributions/normal.hpp>
 
-#include "option.hpp"
-#include "european.hpp"
+#include "european.h"
 
 using namespace std;
 using boost::math::normal;
 
-template<class T>
-european<T>::european(T volatility, T curr_price, T strike_price, T maturity, T int_rates)
+european::european(double volatility, double curr_price, double strike_price, double maturity, double int_rates)
 {
-    this->p_steps = 1000;
+    this->p_steps = 100;
     this->p_volatility = volatility;
     this->p_curr_price = curr_price;
     this->p_strike_price = strike_price;
@@ -28,22 +26,21 @@ european<T>::european(T volatility, T curr_price, T strike_price, T maturity, T 
     this->p_int_rates = int_rates;
 }
 
-template<class T>
-T european<T>::price_binomial()
+double european::price_binomial()
 {
-    T R = epx(p_int_rates*(p_maturity/p_steps));
-    T rinv = 1.0/R;
-    T u = exp(p_volatility*sqrt(p_maturity/p_steps));
-    T uu = u*u;
-    T d = 1.0/u;
-    T p_up = (R-d)/(u-d);
-    T p_down = 1.0 - p_up;
-    vector<T> prices(p_steps + 1);
+    double R = exp(p_int_rates*(p_maturity/p_steps));
+    double rinv = 1.0/R;
+    double u = exp(p_volatility*sqrt(p_maturity/p_steps));
+    double uu = u*u;
+    double d = 1.0/u;
+    double p_up = (R-d)/(u-d);
+    double p_down = 1.0 - p_up;
+    vector<double> prices(p_steps + 1);
     prices[0] = p_curr_price*pow(d, p_steps);
     for (int i =0; i<= p_steps; ++i) {
         prices[i] = uu*prices[i-1];
     }
-    vector<T> call_values(p_steps+1);
+    vector<double> call_values(p_steps+1);
     for (int i = 0; i<= p_steps; ++i) {
         call_values[i] = max(0.0, (prices[i] - p_strike_price));
     }
@@ -56,18 +53,11 @@ T european<T>::price_binomial()
     return call_values[0];
 }
 
-template<class T>
-T european<T>::price_blackscholes()
+double european::price_blackscholes()
 {
-    T d1 = (log(p_curr_price/p_strike_price) + (p_int_rates + (p_volatility*p_volatility)/2)*p_maturity)/(p_volatility*sqrt(p_maturity));
-    T d2 = d1 - p_volatility*sqrt(p_maturity);
+    double d1 = (log(p_curr_price/p_strike_price) + (p_int_rates + (p_volatility*p_volatility)/2)*p_maturity)/(p_volatility*sqrt(p_maturity));
+    double d2 = d1 - p_volatility*sqrt(p_maturity);
     normal N;
-    T  result = p_curr_price*cdf(N, d1) - cdf(N, d2)*p_curr_price*exp(-p_int_rates*p_maturity);
+    double  result = p_curr_price*cdf(N, d1) - cdf(N, d2)*p_curr_price*exp(-p_int_rates*p_maturity);
     return result;
-}
-
-template<class T>
-T european<T>::price_fdm()
-{
-
 }
