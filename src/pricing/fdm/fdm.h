@@ -1,7 +1,7 @@
 /*************************************************************************
 	> File Name: fdm.h
-	> Author: 
-	> Mail: 
+	> Author:
+	> Mail:
 	> Created Time: Wed Feb  3 13:08:47 2016
  ************************************************************************/
 
@@ -42,7 +42,7 @@ class FDMBase {
           double _t_dom, unsigned long _N,
           ConvectionDiffusionPDE* _pde);
 
-  // Override these virtual methods in derived classes for 
+  // Override these virtual methods in derived classes for
   // specific FDM techniques, such as explicit Euler, Crank-Nicolson, etc.
   virtual void calculate_step_sizes() = 0;
   virtual void set_initial_conditions() = 0;
@@ -61,12 +61,14 @@ class FDMEulerExplicit : public FDMBase {
   void calculate_boundary_conditions();
   void calculate_inner_domain();
 
+
  public:
   FDMEulerExplicit(double _x_dom, unsigned long _J,
                    double _t_dom, unsigned long _N,
                    ConvectionDiffusionPDE* _pde);
 
   void step_march();
+  void show_price();
 };
 
 #endif

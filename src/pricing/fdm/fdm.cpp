@@ -1,7 +1,7 @@
 /*************************************************************************
 	> File Name: fdm.cpp
-	> Author: 
-	> Mail: 
+	> Author:
+	> Mail:
 	> Created Time: Wed Feb  3 13:09:36 2016
  ************************************************************************/
 
@@ -13,12 +13,12 @@
 
 FDMBase::FDMBase(double _x_dom, unsigned long _J,
                  double _t_dom, unsigned long _N,
-                 ConvectionDiffusionPDE* _pde) 
+                 ConvectionDiffusionPDE* _pde)
   : x_dom(_x_dom), J(_J), t_dom(_t_dom), N(_N), pde(_pde) {}
 
 FDMEulerExplicit::FDMEulerExplicit(double _x_dom, unsigned long _J,
                                    double _t_dom, unsigned long _N,
-                                   ConvectionDiffusionPDE* _pde) 
+                                   ConvectionDiffusionPDE* _pde)
   : FDMBase(_x_dom, _J, _t_dom, _N, _pde) {
   calculate_step_sizes();
   set_initial_conditions();
@@ -66,14 +66,14 @@ void FDMEulerExplicit::calculate_inner_domain() {
     gamma = dt_sig + dt_sig_2;
 
     // Update inner values of spatial discretisation grid (Explicit Euler)
-    new_result[j] = ( (alpha * old_result[j-1]) + 
-                      (beta * old_result[j]) + 
-                      (gamma * old_result[j+1]) )/(dx*dx) - 
+    new_result[j] = ( (alpha * old_result[j-1]) +
+                      (beta * old_result[j]) +
+                      (gamma * old_result[j+1]) )/(dx*dx) -
       (dt*(pde->source_coeff(prev_t, x_values[j])));
   }
 }
 
-void FDMEulerExplicit::step_march() { 
+void FDMEulerExplicit::step_march() {
   std::ofstream fdm_out("fdm.csv");
 
   while(cur_t < t_dom) {
@@ -83,12 +83,17 @@ void FDMEulerExplicit::step_march() {
     for (int j=0; j<J; j++) {
       fdm_out << x_values[j] << " " << prev_t << " " << new_result[j] << std::endl;
     }
-    
+
     old_result = new_result;
     prev_t = cur_t;
   }
 
   fdm_out.close();
+}
+
+void FDMEulerExplicit::show_price()
+{
+    
 }
 
 #endif
