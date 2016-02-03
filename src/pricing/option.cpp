@@ -12,7 +12,7 @@
 using namespace std;
 
 template<class T>
-option<T>::option()
+option<T>::option(T vol, T curr_price, T strike_price, T maturity, T int_rates)
 {
 
 }
@@ -24,7 +24,7 @@ option<T>::~option()
 }
 
 template<class T>
-T option<T>::price(T vol, T curr_price, T strike_price, T maturity, T int_rate)
+T option<T>::price()
 {
 
 }

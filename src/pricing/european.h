@@ -15,9 +15,9 @@ class european :public option<T> {
 public:
     european(T volatility, T curr_price, T strike_price, T maturity, T int_rates);
     ~european();
-    price_fdm();
-    price_binomial();
-    price_blackscholes();
+    T price_fdm();
+    T price_binomial();
+    T price_blackscholes();
 private:
     T p_volatility;
     T p_curr_price;

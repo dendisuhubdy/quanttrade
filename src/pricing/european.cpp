@@ -15,7 +15,7 @@
 #include "european.h"
 
 using namespace std;
-using boost::math::normal_distribution;
+using boost::math::normal;
 
 template<class T>
 european<T>::european(T volatility, T curr_price, T strike_price, T maturity, T int_rates)
@@ -61,13 +61,13 @@ T european<T>::price_blackscholes()
 {
     T d1 = (log(p_curr_price/p_strike_price) + (p_int_rates + (p_volatility*p_volatility)/2)*p_maturity)/(p_volatility*sqrt(p_maturity));
     T d2 = d1 - p_volatility*sqrt(p_maturity);
-    normal_distribution N;
+    normal N;
     T  result = p_curr_price*cdf(N, d1) - cdf(N, d2)*p_curr_price*exp(-p_int_rates*p_maturity);
     return result;
 }
 
 template<class T>
-T european<T>::price_FDM()
+T european<T>::price_fdm()
 {
     
 }
