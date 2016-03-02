@@ -80,31 +80,132 @@ The NASDAQ Data feed consists of 1) NASDAQ TotalView-ITCH which provides tick-by
 The Bloomberg Market Data Feed (B-PIPE) enables global connectivity to consolidated, normalized market data in real time. Built for the front office and designed for simplicity of use, B-PIPE provides complete coverage of all the same asset classes as the Bloomberg Professional® service. The resulting real-time data, along with streaming delayed data, can nourish a wide array of Bloomberg applications, as well as third-party, internal proprietary, and non-display (black box) applications, for increased efficiency throughout the front office. It has consolidated access to 35 million instruments across all asset classes, aggregated from 330+ exchanges and 5,000+ contributors, as well as Bloomberg composite tickers and market indices.\par
 
 \section{Pricing Methodologies}
+\subsection{European options}
+The option pricing framework written in mathematical formula is defined below. Let $S(t)$ denote the price of the stock at time t. Consider a call option granting the holder the right to buy a stock at a fixed price $K$ at a fixed time T in the future, the current time is t = 0. If at time $T$ the stock price $S(T)$ exceeds the strike price $K$, the holder exercises the option for a profit of $S(T) - K)$; if on the other hand $S(T) \leq K$, the option then expires worthless. \par
+
+$$ 
+(S(T) - K)^+ = max{0, S(T) - K}
+$$
+
+For this expectation we could discount it using the factor $e^{-rT}$ with an $r$ a continuously compounded interest rate. We denote the expected present value of our derivative security as
+
+$$
+E[e^{-rT}(S(T) - K]^+
+$$
+
+We could write this in terms of a differential equation
+
+$$
+\frac{dS(t)}{S(t)} = r dt + \sigma dW(t)
+$$
+
+where W defines a standard Brownian motion. 
+
+\subsection{Asian options}
+
+Let $S_t = S_0\exp(\sigma W_t + (r-\dfrac{1}{2}\sigma^2)$ and a bank account returns a continuously-compounded rate of interest $r$. Consider the derivative which pays
+
+$Y = (\exp(T^{-1}\int^T_0\log(S_u)\text{d}u) - K)^+$ at time T.
+
+$S_0\exp(-\dfrac{1}{2}(r+\sigma^2/6)T)N(-d_1+\sigma\sqrt{T/3}) - Ke^{-rT}F(-d_1)$
+
+where $d_1 = \log(K/S_0-1/2(r-\sigma^2)T)/(\sigma\sqrt{T/3})$.
+
+\subsection{Bermuda options}
+
+Let $t_0$ be initial time and $ t_1, . . . , t_M$ be pre-specified exercise dates with $t_0 < t_1 < · · · < t_M = T$ , the final maturity, and $?t = t_m?t_{m?1}$. Without a loss of generality it is assumed exercise dates are equidistant. To price a Bermudan option, its value is split into two parts, the continuation value and the immediate exercise payoff.
+At time  $t_{m?1}$, the value of $ v(x, t_{m?1})$ consists of the continuation value and the early exercise payoff value.An approximated continuation value, assuming the option is not exercised in the current period, is ([look article][1])
+\begin{align}
+c(x,t_{m-1})=\sum_{k=0}^{N-1} Re\left[\phi\left(\frac{k\pi}{b-a};y|x\right)exp\left(-ik\pi\frac{a}{b-a}\right)\right]V_k(t_m)
+\end{align}
+where
+
+$x:$ be the modeled quantity at t, often the log asset price.
+
+$y:$ be the modeled quantity at T, often the log asset price.
+
+$f(y|x):$ be the probability density function under the pricing measure.
+
+and
+\begin{align}
+V_k(t_m)=\frac{2}{b-a}\int_{a}^{b}v(y,t_m) cos\left(k\pi\frac{y-a}{b-a}\right)dy
+\end{align}
+
+\subsection{American options}
+
+In the Black-Scholes Model or Heston Model, the American option satisfies the same PDE, but with different boundaries.For an American call option $C_A(S,\tau )$, we can therefore write
+\begin{align}
+\frac{\partial {{C}_{A}}}{\partial \tau }=+\frac{1}{2}{{\sigma }^{2}}{{S}^{2}}\frac{{{\partial }^{2}}{{C}_{A}}}{\partial {{S}^{2}}}+(r-q)S\frac{\partial {{C}_{A}}}{\partial S}-r{{C}_{A}}
+\end{align}
+
+or(Heston) $C_A(S,v,\tau )$ satisfy
+\begin{align}
+\frac{\partial {{C}_{A}}}{\partial \tau }=\,+\frac{1}{2}v{{S}^{2}}\frac{{{\partial }^{2}}{{C}_{A}}}{\partial {{S}^{2}}}+\rho \sigma \,vS\frac{{{\partial }^{2}}{{C}_{A}}}{\partial S \partial v}+\frac{1}{2}{{\sigma }^{2}}v\frac{{{\partial }^{2}}{{C}_{A}}}{\partial {{v}^{2}}}-rC_A+(r-q)S\frac{\partial {{C}_{A}}}{\partial S}+\kappa (\theta -v)\,\frac{\partial {{C}_{A}}}{\partial v}
+\end{align}
+
+where $\tau$ is the time until maturity. The PDE holds for $0 \leq \tau < T$, where $T$ is the maturity calendar time, and for $0 < S \leq b(v, \tau)$, where $b(v, ? )$ is the early exercise boundary. Essentially, this means that as long as the stock price is within the early exercise boundary, the American call option behaves like its European counterpart and the PDE holds.
+Building on the work of [Chiarella and Ziogas(2006)][1], [Tzavalis, and  Wang(2003)][2]. approximate the early exercise boundary $b(v,\tau )$ with the log-linear function.\par
+
+\begin{align}
+b(v,\tau )=exp(b_0(\tau)+b_1(\tau)v)
+\end{align}
+
+They show the American call is obtained by adding the early exercise premium to the price of the European call
+
+\begin{align}
+C_A=C_E+V
+\end{align}
+where $V$ is the early exercise premium on an American call with strike $K$ and maturity is $\tau$
+
 \subsection{Binomial Model}
 The binomial model enables a multi-period view of the underlying asset price as well as the price of the option. In contrast to the Black-Scholes model, which provides a numerical result based on inputs, the binomial model allows for the calculation of the asset and the option for multiple periods along with the range of possible results for each period (see below).\par
 
 The advantage of this multi-period view is that the user can visualize the change in asset price from period to period and evaluate the option based on making decisions at different points in time. For an American option, which can be exercised at any time before the expiration date, the binomial model can provide insight into when exercising the option may look attractive and when it should be held for longer periods. By looking at the binomial tree of values, one can determine in advance when a decision on exercise may occur. If the option has a positive value, there is the possibility of exercise, whereas if it has a value less than zero, it should he held for longer periods.\par
 
 \subsection{Monte Carlo Method}
-Monte Carlo methods are based on the analogy between probability and volume. The mathematics of measure formalizes the intuitive notion of probability, associating and event with a set of outcomes and defining the probability of the event to be its volume or measure relative to that of a universe of possible outcomes. Monte Carlo uses this identity in reverse, calculating the volume of a set by interpreting the volume as a probability. In the simplest case, this means sampling randomly from a universe of possible outcomes and taking the fraction of random draws that fall in a given set as an estimate of the set's volume. The law of large number ensures that this estimate converges to the correct value as the number of draws increases. 
+Monte Carlo methods are based on the analogy between probability and volume. The mathematics of measure formalizes the intuitive notion of probability, associating and event with a set of outcomes and defining the probability of the event to be its volume or measure relative to that of a universe of possible outcomes. Monte Carlo uses this identity in reverse, calculating the volume of a set by interpreting the volume as a probability. In the simplest case, this means sampling randomly from a universe of possible outcomes and taking the fraction of random draws that fall in a given set as an estimate of the set's volume. The law of large number ensures that this estimate converges to the correct value as the number of draws increases. \par 
 
+To solve the problem of option pricing
 
+\begin{algorithm}[H]
+	%%\KwData{data from feed}
+	%%\KwResult{inferred price point}
+	\For{i = 1.....n}{
+		generate $Z_i$; \\
+		set $S_i(T) = S(0) exp (|r - frac{1}{2} \sigma^2 T + \sigma \sqrt{T} Z_i$; \\
+		set $C_i = e^{- r T} (S(T) - K)^+$;\\
+	}
+	set $C_n = (C_1 + C_2 + .... + C_n)$\\
+	\caption{Monte Carlo framework for calculating option prices}
+\end{algorithm}
 
 \subsection{Finite Difference Methods}
+The finite difference method provides an accurate and robust schemes for second-order parabolic and first-order hyperbolic partial differential equations in two independent variables, usually called x and t. The first variable x plays the role of a space coordinate and the second variable t plays the role of time. We model the partial differential equations by approximating the derivatives using divided differences. These latter quantities are defined at so-called discrete mesh points. Having motivated FDM in a generic setting we then apply the resulting finite difference schemes to the one-factor Black?Scholes model \par
+
+An ODE has one independent variable and hence it is conceptually easier to under- stand and to approximate than equations in two or more variables. In particular, we examine a special kind of problem. This is called first-order initial value problems (IVP). They are useful objects of study in their own right and our objective is to approximate them using FDM in order to pave the way for more complex applications later \par
+
+\subsection{Finite Element Methods}
+The finite element method has its roots in papers by Richard Courant (Courant, 1943) and John Lighton Synge (see Synge, 1952 and 1957). The 1960?s were the golden years of FEM. Engineers started to apply the method to a wide range of applications in structural and civil engineering and fluid dynamics (Hughes, 2000). It was in the late 1960?s that mathematicians started to take an interest in the field and they developed a rigorous foundation for future study and there has since been a rapid growth in the number of mathematics books on the subject. For example, when the current author embarked on FEM very few books was available (Strang and Fix, 1973) \par
+
+FEM was first applied to equilibrium and time-independent problems, and was later applied to time-dependent problems. More recently, the method is becoming popular in financial engineering applications, as witnessed by the number of articles being published on the subject and the arrival of monographs (see, for example, Topper, 2005).\par
+
+There are many similarities between the finite element method and the finite difference method. Since they both address the same kinds of issues and problems in financial engineering the reader might be wondering which method to use in general or in a particular context. There is no black and white answer, but we shall try to give some answers.\par
+
+\begin{enumerate}\item Learning curve: This is steeper with FEM than with FDM. Some people see FEM as a branch of applied functional analysis and they use concepts such as Hilbert and Sobolev spaces, variational formulations and domain triangulation in their work. FDM is easier because it just replaces derivatives by divided differences. FEM has its roots in engineering and structuralanalysis. It is also extremely useful for integral equations.\item Accuracy: In theory, higher order accuracy is possible with FEM but we must construct piecewise polynomial spaces of higher degree. We get ?polynomial snaking? effects, which means that the number of sub-intervals where the piecewise basis polynomial is non-zero increases with the degree of the polynomial.
+\end{enumerate}
+
+Since FEM is an integral formulation it is better at approximating discontinuous coefficients than FDM.
+
+\begin{enumerate}\item Multi-factor problems: FEM suffers from the same curse of dimensionality as FDM does. Three dimensions is the limit (it would seem), after which things tend to become intractable.A possible cure for this problem is to use Meshless or some form of operator splitting. 
+\item Domain of integration: FEM is particularly good at modelling problems with irregular domains, while FDM has difficulties with such domains. On the other hand, most problems in financial engineering are defined in boxes and cubes.
+\end{enumerate}
 
 \section{Output Methodologies}
-From an equities trading perspective, FAST is more widely used for market data dissemination, where message rates are much higher. FIX is the protocol of choice for interoperability between firms, and often internal systems as well, although different implementations can vary widely in the specific messages & attributes used.\par
+From an equities trading perspective, FAST is more widely used for market data dissemination, where message rates are much higher. FIX is the protocol of choice for interoperability between firms, and often internal systems as well, although different implementations can vary widely in the specific messages and attributes used.\par
 
 Brokers and trading venues will generally offer order entry via some flavour of FIX, and offer a complementary native binary protocol for the most performance-sensitive clients or specialised features. The FIX interface is often just a wrapper around the native one, with an more limited set of message types and parameters.\par
 
 A good example of this is the London Stock Exchange, with offers FIX 5.0 for order entry, along with their own low-latency native protocol. For market data they offer a combination of FAST and ITCH, although even using FAST, the full-depth market data feed isn't available to subscribers, and requires ITCH, as described here\par
-
-
-\section{Securities and Partial Differential Equations}
-\subsection{European options}
-\subsection{Asian options}
-\subsection{Bermuda options}
-\subsection{American options}
 
 \section{Results}
 Here we do a comparison with the other quantitative analysis library Quantlib. We choose Quantlib because of its closest proximity of programming language with QuantTrade: 1) both software libraries are written in C++, 2) both tries to optimize the performance of the algorithms.

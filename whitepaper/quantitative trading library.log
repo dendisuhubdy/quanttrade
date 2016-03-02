@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.2)  2 MAR 2016 12:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.2)  2 MAR 2016 13:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -647,14 +647,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-
+Missing character: There is no · in font cmr10!
+Missing character: There is no · in font cmr10!
+Missing character: There is no · in font cmr10!
+ [4] [5]
+[6] [7]
 No file "quantitative trading library".bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 230.
+[8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 230.
  (./quantitative trading library.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 114.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 114.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 230.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 230.
 
 
 Package rerunfilecheck Warning: File `"quantitative trading library".out' has c
@@ -664,29 +668,38 @@ hanged.
 
 Package rerunfilecheck Info: Checksums for `"quantitative trading library".out'
 :
-(rerunfilecheck)             Before: 8CE106EE3A14FDC4D77390778621C83C;1139
-(rerunfilecheck)             After:  39C79102F6824FB32EC41F6A891E3638;1128.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
+(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
+(rerunfilecheck)             After:  E09E0C5198E6A67017929D7C4DFCC0B1;1184.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 230.
  ) 
 Here is how much of TeX's memory you used:
- 12833 strings out of 493089
- 193985 string characters out of 6134842
- 374464 words of memory out of 5000000
- 16142 multiletter control sequences out of 15000+600000
- 17043 words of font info for 40 fonts, out of 8000000 for 9000
+ 12864 strings out of 493089
+ 194267 string characters out of 6134842
+ 378360 words of memory out of 5000000
+ 16145 multiletter control sequences out of 15000+600000
+ 24393 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,12n,47p,622b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,12n,47p,1150b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/lo
-cal/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/loca
-l/texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb>
-Output written on "quantitative trading library.pdf" (4 pages, 97809 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
+Output written on "quantitative trading library.pdf" (8 pages, 218792 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 146 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
