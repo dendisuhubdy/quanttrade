@@ -157,6 +157,7 @@ C_A=C_E+V
 \end{align}
 where $V$ is the early exercise premium on an American call with strike $K$ and maturity is $\tau$
 
+\section{Numerical Solve of Pricing Models}
 \subsection{Binomial Model}
 The binomial model enables a multi-period view of the underlying asset price as well as the price of the option. In contrast to the Black-Scholes model, which provides a numerical result based on inputs, the binomial model allows for the calculation of the asset and the option for multiple periods along with the range of possible results for each period (see below).\par
 
@@ -191,12 +192,17 @@ FEM was first applied to equilibrium and time-independent problems, and was late
 
 There are many similarities between the finite element method and the finite difference method. Since they both address the same kinds of issues and problems in financial engineering the reader might be wondering which method to use in general or in a particular context. There is no black and white answer, but we shall try to give some answers.\par
 
-\begin{enumerate}\item Learning curve: This is steeper with FEM than with FDM. Some people see FEM as a branch of applied functional analysis and they use concepts such as Hilbert and Sobolev spaces, variational formulations and domain triangulation in their work. FDM is easier because it just replaces derivatives by divided differences. FEM has its roots in engineering and structuralanalysis. It is also extremely useful for integral equations.\item Accuracy: In theory, higher order accuracy is possible with FEM but we must construct piecewise polynomial spaces of higher degree. We get ?polynomial snaking? effects, which means that the number of sub-intervals where the piecewise basis polynomial is non-zero increases with the degree of the polynomial.
+\begin{enumerate}
+\item Learning curve: This is steeper with FEM than with FDM. Some people see FEM as a branch of applied functional analysis and they use concepts such as Hilbert and Sobolev spaces, variational formulations and domain triangulation in their work. FDM is easier because it just replaces derivatives by divided differences. FEM has its roots in engineering and structural
+analysis. It is also extremely useful for integral equations.
+\item Accuracy: In theory, higher order accuracy is possible with FEM but we must construct piecewise polynomial spaces of higher degree. We get ?polynomial snaking? effects, which means that the number of sub-intervals where the piecewise basis polynomial is non-zero increases with the degree of the polynomial.
 \end{enumerate}
 
 Since FEM is an integral formulation it is better at approximating discontinuous coefficients than FDM.
 
-\begin{enumerate}\item Multi-factor problems: FEM suffers from the same curse of dimensionality as FDM does. Three dimensions is the limit (it would seem), after which things tend to become intractable.A possible cure for this problem is to use Meshless or some form of operator splitting. 
+\begin{enumerate}
+\item Multi-factor problems: FEM suffers from the same curse of dimensionality as FDM does. Three dimensions is the limit (it would seem), after which things tend to become intractable.
+A possible cure for this problem is to use Meshless or some form of operator splitting. 
 \item Domain of integration: FEM is particularly good at modelling problems with irregular domains, while FDM has difficulties with such domains. On the other hand, most problems in financial engineering are defined in boxes and cubes.
 \end{enumerate}
 
