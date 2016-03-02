@@ -1,0 +1,124 @@
+\documentclass[fontsize=11pt]{scrartcl} % A4 paper and 11pt 
+\usepackage[T1]{fontenc}
+\usepackage[font=small]{caption}
+\usepackage{wrapfig}
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage[margin=1in]{geometry}
+\usepackage[procnames]{listings}
+\usepackage{color}
+\usepackage{graphicx, subcaption}
+\usepackage{algorithm2e}
+\usepackage[svgnames]{xcolor} 
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+%\usepackage{natbib} 
+\usepackage[breaklinks,hidelinks]{hyperref}
+\usepackage[ margin=.2cm]{caption}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{10.6pt} % Customize the height of the header
+\setlength\parindent{0pt} 
+\setlength{\parskip}{1em}
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\graphicspath{{../figures/}}
+\DeclareGraphicsExtensions{.png, .jpg}
+
+\usepackage{booktabs} % Top and bottom rules for table
+\usepackage[font=small,labelfont=bf, skip=0pt]{caption} % Required for specifying captions to tables and figures
+\usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
+\usepackage{wrapfig} % Allows wrapping text around tables and figures
+ 
+\title{	
+	\normalfont \normalsize 
+	\textsc{North Carolina State University} \\ [5pt] % Your university, school and/or department name(s)
+	\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+	\huge QuantTrade: A C++ Quantitative Pricing and Trading Library\\ % The assignment title
+	\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+\author{Tao Pang \& Dendi Suhubdy} % Your name
+\date{\normalsize March 2, 2016} % Today's date or a custom date
+ 
+\begin{document}
+\definecolor{keywords}{RGB}{255,0,90}
+\definecolor{comments}{RGB}{0,0,113}
+\definecolor{red}{RGB}{160,0,0}
+\definecolor{green}{RGB}{0,150,0}
+
+\maketitle
+
+\section{Abstract}
+Quanttrade is a complete framework for quantitative finance starting from obtaining inputs of datasets from real-time trading systems, pricing them, and also outputting a predesignated trade order. This framework has been inspired by the inability for quantitative traders to modify the inner workings of a software libraries in critical systems such as front desk trading applications, risk evaluating software or central exchange trading engine. Using this framework will ease the transition for a beginner in quantitative finance to build automated pricing and trading engines. \par
+
+\section{Introduction}
+Automated trading systems are often used with electronic trading in automated market centers including electronic communication networks (ECNs) and alternative trading systems (ATS). Automated trading systems and electronic trading platforms can execute repetitive tasks at speeds with orders of magnitude greater than any human equivalent. Traditional risk controls and safeguards that relied on human judgment and manual speeds that were appropriate to manual and/or floor-based trading environments, must now be automated to evaluate and control automated trading.\par
+
+\section{Software Structure}
+We break down the software structure to three parts 1) the input class, 2) the pricing class, and 3) the output class. The main reason behind this structure is C++ design of Object-Oriented Programming (OOP) which will allow the breakdown the execution codes in chunk of blocks. This will ease other developers to take away chunks of codes that they will need for specific in-house projects and ease future development of the code.\par
+
+The input class is the code chunk that interfaces with a data feed stream. This data feed could be a real time data feed such as 1) NYSE and NASDAQ SIP which are used extensively in the industry or 2) Bloomberg data feed which is used in academia and research desks. For educational purposes, one could also choose a dummy data feed for software testing purposes. These arise in derivative software developments where dynamic hedging needs extensive testing before deployment. The output of this class would be data objects that could be then processed by the pricing class.\par
+
+The pricing class is the code chunk that takes the data from the input class and process it into viable price output. This class uses numerical analysis to allow efficient calculation of partial differential equations (PDEs) to solve derivative pricing problems. The output of this class would be the price points in time for each inputted security.\par
+
+The output class is the code chunk that obtains the price point processed in the pricing class and process it into a trading decision and execution. The main trading decision will be made by comparing the price point inferred by the pricing class and the input price point, and result in a trade decision. This trade decision will the be executed with the built in Financial Informational Exchange (FIX) and Financial Information Exchange Adapted for Streaming (FAST) class that will send orders through a designated pipeline towards exchanges. \par
+
+\section{Input Methodologies}
+\subsection{NYSE Data Feed}
+
+The NYSE Data feed consists of: 1) NYSE Alert is a real-time data feed that provides real-time messages regarding certain conditions related to the trading of NYSE-traded securities. These alerts include Security Trading Status data such as Market Imbalances, Trading Halts/Delays, ITS Pre-Opening Indications, Trading Collars, Price Indications and Trading Circuit Breakers. 2) The NYSE Real-Time NYSE BBO feed provides NYSE Quotes (best bid/ask quotations) for all NYSE-traded securities.This is a top of book feed that publishes updates for every event in real time. 3) the NYSE Integrated Feed provides a comprehensive order-by-order view of events in the NYSE equities market. This single high-performance product integrates orders and trades in sequence, providing a more deterministic and transparent view of the order book and related activity, 4) NYSE OpenBook provides a real-time view of the Exchange's limit-order book for all NYSE-traded securities. NYSE OpenBook lets traders see displayed limit-order volume at every bid and offer price, thus providing full depth-of-market view to the traders.\par
+
+\subsection{NASDAQ Data Feed}
+The NASDAQ Data feed consists of 1) NASDAQ TotalView-ITCH which provides tick-by-tick details for all displayable orders in the Nasdaq execution system. Also includes Net Order Imbalance Indicator (NOII) data for the Nasdaq Opening and Closing Crosses, 2) NASDAQ Basic which provides best bid and offer quotations from the Nasdaq execution system as well as trade data from the Nasdaq execution system and FINRA/Nasdaq Trade Reporting Facility (TRF), 3) NASDAQ Last Sale facilitates market transparency by offering real-time last sale data from the Nasdaq execution system and FINRA/Nasdaq Trade Reporting Facility (TRF) at a low cost to market data distributors.\par
+
+\subsection{Bloomberg Data Feed}
+The Bloomberg Market Data Feed (B-PIPE) enables global connectivity to consolidated, normalized market data in real time. Built for the front office and designed for simplicity of use, B-PIPE provides complete coverage of all the same asset classes as the Bloomberg Professional® service. The resulting real-time data, along with streaming delayed data, can nourish a wide array of Bloomberg applications, as well as third-party, internal proprietary, and non-display (black box) applications, for increased efficiency throughout the front office. It has consolidated access to 35 million instruments across all asset classes, aggregated from 330+ exchanges and 5,000+ contributors, as well as Bloomberg composite tickers and market indices.\par
+
+\section{Pricing Methodologies}
+\subsection{Binomial Model}
+The binomial model enables a multi-period view of the underlying asset price as well as the price of the option. In contrast to the Black-Scholes model, which provides a numerical result based on inputs, the binomial model allows for the calculation of the asset and the option for multiple periods along with the range of possible results for each period (see below).\par
+
+The advantage of this multi-period view is that the user can visualize the change in asset price from period to period and evaluate the option based on making decisions at different points in time. For an American option, which can be exercised at any time before the expiration date, the binomial model can provide insight into when exercising the option may look attractive and when it should be held for longer periods. By looking at the binomial tree of values, one can determine in advance when a decision on exercise may occur. If the option has a positive value, there is the possibility of exercise, whereas if it has a value less than zero, it should he held for longer periods.\par
+
+\subsection{Monte Carlo Method}
+Monte Carlo methods are based on the analogy between probability and volume. The mathematics of measure formalizes the intuitive notion of probability, associating and event with a set of outcomes and defining the probability of the event to be its volume or measure relative to that of a universe of possible outcomes. Monte Carlo uses this identity in reverse, calculating the volume of a set by interpreting the volume as a probability. In the simplest case, this means sampling randomly from a universe of possible outcomes and taking the fraction of random draws that fall in a given set as an estimate of the set's volume. The law of large number ensures that this estimate converges to the correct value as the number of draws increases. 
+
+
+
+\subsection{Finite Difference Methods}
+
+\section{Output Methodologies}
+From an equities trading perspective, FAST is more widely used for market data dissemination, where message rates are much higher. FIX is the protocol of choice for interoperability between firms, and often internal systems as well, although different implementations can vary widely in the specific messages & attributes used.\par
+
+Brokers and trading venues will generally offer order entry via some flavour of FIX, and offer a complementary native binary protocol for the most performance-sensitive clients or specialised features. The FIX interface is often just a wrapper around the native one, with an more limited set of message types and parameters.\par
+
+A good example of this is the London Stock Exchange, with offers FIX 5.0 for order entry, along with their own low-latency native protocol. For market data they offer a combination of FAST and ITCH, although even using FAST, the full-depth market data feed isn't available to subscribers, and requires ITCH, as described here\par
+
+
+\section{Securities and Partial Differential Equations}
+\subsection{European options}
+\subsection{Asian options}
+\subsection{Bermuda options}
+\subsection{American options}
+
+\section{Results}
+Here we do a comparison with the other quantitative analysis library Quantlib. We choose Quantlib because of its closest proximity of programming language with QuantTrade: 1) both software libraries are written in C++, 2) both tries to optimize the performance of the algorithms.
+
+The main focus on our comparisons would be the computational speed of our algorithms. Here we will show the computational speeds of different pricing models such as 1) plain vanilla European option, 2) barrier options, 3) lookback options, 4) Bermuda options, 5) Asian options, 6) American options.
+
+\section{Conclusion Remarks}
+
+\newpage 
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\newpage
+\section{Appendix}
+
+\end{document}
