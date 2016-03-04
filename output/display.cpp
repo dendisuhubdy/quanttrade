@@ -11,7 +11,7 @@
 
 using namespace std;
 
-template <class V> void print(const vector<v>& v)
+template <class V> void print(const vector<V>& v)
 {
     cout << endl << "V: [";
 

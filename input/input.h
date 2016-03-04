@@ -1,16 +1,16 @@
 #pragma once
 
-#include <../include/blpapi/blpapi_defs.h>
-#include <../include/blpapi/blpapi_element.h>
-#include <../include/blpapi/blpapi_event.h>
-#include <../include/blpapi/blpapi_eventdispatcher.h>
-#include <../include/blpapi/blpapi_exception.h>
-#include <../include/blpapi/blpapi_logging.h>
-#include <../include/blpapi/blpapi_message.h>
-#include <../include/blpapi/blpapi_name.h>
-#include <../include/blpapi/blpapi_request.h>
-#include <../include/blpapi/blpapi_session.h>
-#include <../include/blpapi/blpapi_subscriptionlist.h>
+#include <blpapi/blpapi_defs.h>
+#include <blpapi/blpapi_element.h>
+#include <blpapi/blpapi_event.h>
+#include <blpapi/blpapi_eventdispatcher.h>
+#include <blpapi/blpapi_exception.h>
+#include <blpapi/blpapi_logging.h>
+#include <blpapi/blpapi_message.h>
+#include <blpapi/blpapi_name.h>
+#include <blpapi/blpapi_request.h>
+#include <blpapi/blpapi_session.h>
+#include <blpapi/blpapi_subscriptionlist.h>
 
 #include <iostream>
 #include <sstream>

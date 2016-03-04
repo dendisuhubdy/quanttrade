@@ -1,7 +1,6 @@
 // raleigh-triangle-index.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include "input.h"
 #include "processing.h"
 #include "output.h"
@@ -12,15 +11,17 @@
 #include <vector>
 #include <ctime>
 
+#include <windows.h>
+
 int main(int argc, char **argv)
 {
-	input triangle;
+	input triangle = input();
     SYSTEMTIME time;
 	
 	while (true) {
 		// get current system time
 
-		//GetSystemTime(&time);
+		GetSystemTime(&time);
 		// initialize our input class
 
 		try {
@@ -46,11 +47,7 @@ int main(int argc, char **argv)
 
 	// wait for enter key to exit application
 	std::cout << "Press ENTER to quit" << std::endl;
-	
-	// same as system("PAUSE")
-	char dummy[2];
-	
-	std::cin.getline(dummy, 2);
+	std::cin.get();
 	
 	return 0;
 }

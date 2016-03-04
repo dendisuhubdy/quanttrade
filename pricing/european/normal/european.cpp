@@ -4,7 +4,6 @@
 	> Mail: dasuhubd@ncsu.edu
 	> Created Time: Tue 02 Feb 2016 10:46:42 PM EST
  ************************************************************************/
-
  #include <iostream>
  #include <cmath>
  #include <algorithm>

@@ -11,7 +11,7 @@
  #include <cmath>
  #include <algorithm>
  #include <vector>
- #include <boost/math/distributions/normal.hpp>
+ #include <boost\math\distributions\normal.hpp>
 
 class european{
 public:
