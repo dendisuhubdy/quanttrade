@@ -59,7 +59,8 @@ int main(int argc, char const* argv[])
         const double dividend = 0.03;
         const std::size_t numberOfTimeSteps = 3;
         const double spaceStepSize = 0.2;
-
+        
+       clock_t startTime = clock();
         //precomputing variables
         const std::size_t gridSize = 2 * numberOfTimeSteps + 1;
         boost::numeric::ublas::vector<double> stocks(gridSize);
@@ -92,10 +93,12 @@ int main(int argc, char const* argv[])
 
        //making finite difference
        FiniteDifference finiteDifference(stocks, numberOfTimeSteps);
-
+       
        //calculate price
        boost::numeric::ublas::vector<double> results = 
            finiteDifference.doScheme(scheme, stepCondition, rightHandSide);
+       std::cout << "the European option costs " 
+                 << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " seconds." << std::endl;
 
        std::cout << "result" << results << std::endl;
        std::cout << std::endl;
@@ -119,6 +122,7 @@ int main(int argc, char const* argv[])
         const std::size_t numberOfTimeSteps = 3;
         const double spaceStepSize = 0.2;
 
+        clock_t startTime = clock();
         //precomputing variables
         const std::size_t gridSize = 2 * numberOfTimeSteps + 1;
         boost::numeric::ublas::vector<double> stocks(gridSize);
@@ -151,11 +155,12 @@ int main(int argc, char const* argv[])
 
        //making finite difference
        FiniteDifference finiteDifference(stocks, numberOfTimeSteps);
-
        //calculate price
        boost::numeric::ublas::vector<double> results = 
            finiteDifference.doScheme(
                scheme, stepCondition, rightHandSide);
+       std::cout << "the American put option with the Explicit FDM method costs" 
+            << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " seconds." << std::endl;
 
        std::cout << "result" << results << std::endl;
 
@@ -211,11 +216,13 @@ int main(int argc, char const* argv[])
 
        //making finite difference
        FiniteDifference finiteDifference(stocks, numberOfTimeSteps);
-
+       clock_t startTime = clock();
        //calculate price
        boost::numeric::ublas::vector<double> results = 
            finiteDifference.doScheme(
                scheme, stepCondition, rightHandSide);
+       std::cout << "the American put option with an implicit FDM method costs " 
+                 << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " seconds." << std::endl;
 
        std::cout << "result" << results << std::endl;
        std::cout << std::endl;
@@ -238,6 +245,8 @@ int main(int argc, char const* argv[])
         const std::size_t numberOfTimeSteps = 3;
         const double spaceStepSize = 0.2;
 
+        
+        clock_t startTime = clock();
         //precomputing variables
         const std::size_t gridSize = 2 * numberOfTimeSteps + 1;
         boost::numeric::ublas::vector<double> stocks(gridSize);
@@ -248,9 +257,9 @@ int main(int argc, char const* argv[])
         const double middleValue = calculator.calculateMiddleValue();
         const double lowerValue = calculator.calculateLowerValue();
 
-        std::cout << upperValue << std::endl;
-        std::cout << middleValue << std::endl;
-        std::cout << lowerValue << std::endl;
+        //std::cout << upperValue << std::endl;
+        //std::cout << middleValue << std::endl;
+        //std::cout << lowerValue << std::endl;
 
 
         //payoff
@@ -275,11 +284,13 @@ int main(int argc, char const* argv[])
 
        //making finite difference
        FiniteDifference finiteDifference(stocks, numberOfTimeSteps);
-
+       
        //calculate price
        boost::numeric::ublas::vector<double> results = 
            finiteDifference.doScheme(
                scheme, stepCondition, rightHandSide);
+       std::cout << "The American put option with Crank-Nicolson costs "
+                 << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " seconds." << std::endl;
 
        std::cout << "result" << results << std::endl;
     }

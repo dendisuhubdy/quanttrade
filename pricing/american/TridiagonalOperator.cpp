@@ -12,7 +12,7 @@ TridiagonalOperator::TridiagonalOperator(
     _middleDiagonal(middleDiagonal),
     _lowerDiagonal(lowerDiagonal)
 {
-    
+
 }
 
 TridiagonalOperator::TridiagonalOperator(
@@ -29,7 +29,7 @@ TridiagonalOperator::TridiagonalOperator(
     boundaryCondition->operatorCondition(*this);
 }
 
-TridiagonalOperator::~TridiagonalOperator() 
+TridiagonalOperator::~TridiagonalOperator()
 {
 }
 
@@ -71,16 +71,16 @@ void TridiagonalOperator::calculateTransformedVariables(
     boost::numeric::ublas::vector<double>& transformedVariable2) const
 {
     transformedVariable1[0] = _middleDiagonal[0];
-    transformedVariable2[0] = rightHandSide[0];  
+    transformedVariable2[0] = rightHandSide[0];
 
     for (std::size_t rowIndex = 1; rowIndex < _middleDiagonal.size(); ++rowIndex) {
-        transformedVariable1[rowIndex] = _middleDiagonal[rowIndex] 
-            - _lowerDiagonal[rowIndex - 1] * _upperDiagonal[rowIndex] 
+        transformedVariable1[rowIndex] = _middleDiagonal[rowIndex]
+            - _lowerDiagonal[rowIndex - 1] * _upperDiagonal[rowIndex]
                 / transformedVariable1[rowIndex - 1];
-        transformedVariable2[rowIndex] = rightHandSide[rowIndex]  
-            - _upperDiagonal[rowIndex] * transformedVariable2[rowIndex - 1] 
+        transformedVariable2[rowIndex] = rightHandSide[rowIndex]
+            - _upperDiagonal[rowIndex] * transformedVariable2[rowIndex - 1]
                 / transformedVariable1[rowIndex - 1];
-        std::cout << "temp2:" << transformedVariable2[rowIndex] << std::endl;
+        //std::cout << "temp2:" << transformedVariable2[rowIndex] << std::endl;
     }
 }
 
@@ -90,13 +90,13 @@ void TridiagonalOperator::substituteTransFormedVariables(
     const boost::numeric::ublas::vector<double>& transformedVariable2) const
 {
     const std::size_t lastIndex = _middleDiagonal.size() - 1;
-    results[lastIndex] = 
-        (transformedVariable2[lastIndex]) 
+    results[lastIndex] =
+        (transformedVariable2[lastIndex])
             / transformedVariable1[lastIndex];
 
     for (std::size_t rowIndex = _middleDiagonal.size() - 2; rowIndex > 0; --rowIndex) {
-        results[rowIndex] = 
-            (transformedVariable2[rowIndex] - _lowerDiagonal[rowIndex] * results[rowIndex + 1]) 
+        results[rowIndex] =
+            (transformedVariable2[rowIndex] - _lowerDiagonal[rowIndex] * results[rowIndex + 1])
             / transformedVariable1[rowIndex];
     }
 

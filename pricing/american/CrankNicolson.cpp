@@ -44,7 +44,7 @@ void CrankNicolson::doBackward(
     const std::size_t lastIndex = workingCopy.size() - 1;
     rightHandSide[lastIndex] = _boundaryCondtion->upperCondition(rightHandSide);
     rightHandSide[0] = _boundaryCondtion->lowerCondition(rightHandSide);
-    std::cout << "afterBdd:" << rightHandSide << std::endl;
+    //std::cout << "afterBdd:" << rightHandSide << std::endl;
     
 
     //solve

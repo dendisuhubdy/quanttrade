@@ -14,7 +14,7 @@ INC_FLAGS = -I./
 
 SDE_WA_SRC =  $(wildcard *.cpp)
 SDE_WA_OBJS =  $(SDE_WA_SRC:.cpp=.o)
-TARGETS = european_option 
+TARGETS = american_option_fdm 
 
 .PHONY: all
 all: $(TARGETS)
