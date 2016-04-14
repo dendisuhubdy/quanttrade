@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.3}{Software Structure}{}% 3
+\BOOKMARK [1][-]{section.4}{Input Methodologies}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{NYSE Data Feed}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{NASDAQ Data Feed}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Bloomberg Data Feed}{section.4}% 7
+\BOOKMARK [1][-]{section.5}{Pricing Methodologies}{}% 8
+\BOOKMARK [2][-]{subsection.5.1}{European options}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.2}{Asian options}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.3}{Bermuda options}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.4}{American options}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Numerical Solve of Pricing Models}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Binomial Model}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.2}{Monte Carlo Method}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.3}{Finite Difference Methods}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.4}{Finite Element Methods}{section.6}% 17
+\BOOKMARK [1][-]{section.7}{Output Methodologies}{}% 18
+\BOOKMARK [1][-]{section.8}{Results}{}% 19
+\BOOKMARK [1][-]{section.9}{Conclusion Remarks}{}% 20
+\BOOKMARK [1][-]{section.10}{Appendix}{}% 21
